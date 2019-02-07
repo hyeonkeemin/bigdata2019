@@ -1,0 +1,19 @@
+#coding: cp949
+feel ='호감'
+hit_on_count=0
+
+while feel:
+    hit_on_count += 1 #1씩 증가함
+    print('%d번 데이트 신청합니다.'%hit_on_count)
+    if hit_on_count == 10:
+        print('고백할 때가 다가 왔네요.')
+        continue
+    feel=input('현재 그녀에 대한 당신의 감정은 어떤가요?')
+    if(feel=='비호감'):
+        print('그런 단념하세요')
+        break
+
+# modify1
+# modify2
+# modify3
+# modify4
