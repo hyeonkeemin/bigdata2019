@@ -1,0 +1,8 @@
+#coding: 949
+x=0
+
+if x=0:
+    print("xดย 0")
+else:
+    print("xดย 0พฦดิ")
+
