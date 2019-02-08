@@ -1,7 +1,6 @@
 a=1 # 전역변수
 def global_var_read():
     print(a)
-
 def global_var_write():
     a+=2 # 변수에 값을 쓰려는 순간 파이썬에서는 변수를 지역변수로 인식한다. 따라서 a+=2는 문법적으로 오류
 
