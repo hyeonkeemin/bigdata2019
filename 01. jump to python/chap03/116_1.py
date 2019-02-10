@@ -1,7 +1,8 @@
+#endcoding:cp949
 is_cash=1
 is_card=0
 
 if is_cash or is_card:
-    print('ÅÃ½Ã¸¦ Å¸°í °¡¼¼¿ä')
+    print('ï¿½Ã½Ã¸ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½')
 else:
-    print('°É¾î°¡¼¼¿ä')
+    print('ï¿½É¾î°¡ï¿½ï¿½ï¿½ï¿½')
