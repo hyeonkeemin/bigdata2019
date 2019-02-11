@@ -1,6 +1,4 @@
-d=['1','2','3']
+a = str(input('입력 : '))
+b = int(a)+2
 
-for i in d:
-    f = (input('입력 : ')+i)
-
-print(f)
+print(b)
