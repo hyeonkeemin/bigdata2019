@@ -1,5 +1,8 @@
-a = open('./방명록.txt', 'r', encoding='UTF-8')
-b = a.readline()
-print(b)
-print('임꺽정' in b)
+a = open('연습생.txt', 'w', encoding='UTF-8')
+b = '''현아
+나연
+지수
+민지
+지나'''
+a.write(b)
 a.close()
