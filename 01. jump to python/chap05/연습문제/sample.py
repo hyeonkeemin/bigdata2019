@@ -1,2 +1,5 @@
-a=input('입력하라 : ').split()
-print(a)
+d = ['r']
+c = 0
+while c < 3:
+    for i in d:
+        d.append()
