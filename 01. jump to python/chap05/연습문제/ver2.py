@@ -11,16 +11,14 @@ class restaurant:
         print('저희 %s 레스토랑 오픈 했습니다. 어서오세요.\n'%self.restaurant_name)
 
     def __del__(self):
-        if len(input_list) == 3:
-            print('10시가 되었습니다.')
-            for name in input_list:
-                print('%s 레스토랑 문닫습니다.'%name[0])
+        print('%s 레스토랑 문닫습니다.'%self.restaurant_name)
 
-a = ['1','2','3']
-input_list=[]
-for list in a:
-    name_type = input('레스토랑 이름과 요리 재료를 선택하세요(공백으로 구분) : ').split()
-    a = restaurant(name_type[0], name_type[1])
-    a.describe_restaurant()
-    a.open_restaurant()
-    input_list.append(name_type)
+restaurant_list = []
+for index_number in range(0, 3):
+    restaurant_list.append(input('레스토랑 이름과 요리 재료를 선택하세요(공백으로 구분) : ').split())
+
+    restaurant_list[index_number] = restaurant(restaurant_list[0], restaurant_list[1])
+    restaurant_list[index_number].describe_restaurant()
+    restaurant_list[index_number].open_restaurant()
+
+print('밤 10시가 되었습니다.')

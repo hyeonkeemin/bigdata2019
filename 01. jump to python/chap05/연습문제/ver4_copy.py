@@ -1,9 +1,12 @@
-
 class restaurant:
-
     def __init__(self, name, type):
         self.restaurant_name = name
         self.restaurant_type = type
+        self.today_customer = 0
+        self.log_file = open('./고객서빙현황로그.txt', 'r', encoding='UTF-8')
+        self.total_accum = int(self.log_file.readline())
+        self.log_file.close()
+        self.log_file = open('./고객서빙현황로그.txt', 'w', encoding='UTF-8')
 
     def describe_restaurant(self):
         print('저희 레스토랑 명칭은 %s 이고 %s 전문점입니다.'%(self.restaurant_name, self.restaurant_type))
@@ -30,12 +33,20 @@ class restaurant:
                 else:
                     print('%d명 들어오셨습니다. 자리 안내해드리겠습니다.'%int(base_message))
                     number_served += int(base_message)
-
+                    self.today_customer += int(base_message)
             elif base_message == 'p':
                 print('지금까지 %d명 오셨습니다.'%number_served)
+
+    def __del__(self):
+        self.log_file.write(str(self.today_customer + self.total_accum))
+        self.log_file.close()
 
 
 name_type = input('레스토랑 이름과 요리 종류를 선택하세요(공백으로 구분) : ').split()
 a = restaurant(name_type[0], name_type[1])
 a.describe_restaurant()
+
+
+# today_count_read = open('./고객서빙현황로그.txt', 'r', encoding='UTF-8')
+# total_accum = int(today_count_read.readline())
 
