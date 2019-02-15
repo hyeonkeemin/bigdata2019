@@ -1,21 +1,11 @@
-                            # 123156
-def duplicate():
-    input_num = str(input('숫자 입력하세요 : '))
+def dup_num(s):
     result = []
-    result_dup = []
-    if len(input_num) < 10:
-        result_dup = False
-    else:
-        for num in input_num:
+    for num in s:
+        if num not in result:
             result.append(num)
-            if num not in result:
-                result_dup = True
-            else:
-                result_dup = False
-    print(result_dup)
+        else:
+            return False
+    return len(result) == 10
 
-duplicate()
-
-
-
-
+a=str(input('수 입력 : '))
+print(dup_num(a))

@@ -7,6 +7,9 @@ def survey():
             name = str(input('이름을 입력하세요 : '))
             print('설문에 응답해주셔서 감사합니다.')
             poll = open('poll.txt', 'a', encoding='UTF-8')
-            poll.write('\n'+'[%s] '%name + question)
+            poll.write('[%s] '%name + question+'\n')
             poll.close()
-survey()
+
+
+if __name__ == '__main__':
+    survey()

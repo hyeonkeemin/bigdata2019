@@ -1,46 +1,20 @@
-                           'aaaabbc'
-def new_a(input_str):
-    cnd = 0
-    list_output = list(input_str)
-    for output_str in input_str:
-        a
-
-
-
-new_a('aaabb')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def compress_string(s):
-    _c = ""
+                                            # a a a b b c a
+                                            # 0 1 2 3 4 5 6
+def check():
+    input_string = list(input('입력 : '))
+    new_string = []
     cnt = 0
-    result = ""
-    for c in s:
-        if c!=_c:
-            _c = c
-            if cnt: result += str(cnt)
-            result += c
-            cnt = 1
-        else:
-            cnt +=1
-    if cnt: result += str(cnt)
-    return result
+    i = 0
+    j = -1
+    while j <= len(input_string):
+        j += 1
+        cnt += 1
+        if j == len(input_string):
+            break
+        if input_string[i] != input_string[j]:
+            i = j
+            new_string.append(input_string[i-1]+str(cnt))
+            cnt = 0
+    print(new_string)
 
-print (compress_string("aaabbcccccca"))
+check()
