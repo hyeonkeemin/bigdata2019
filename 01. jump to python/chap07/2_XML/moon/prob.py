@@ -2,6 +2,7 @@ from xml.etree.ElementTree import parse
 tree = parse('students_info.xml')
 root = tree.getroot()
 
+profile=[]
 name=[]
 sex=[]
 sex_man=0;sex_woman=0
@@ -18,34 +19,15 @@ lang_period=[]
 for element in root.findall('student'):
     name.append(element.get('name'))
     sex.append(element.get('sex'))
-    if sex == '남':
-        sex_man += 1
-    elif sex == '여':
-        sex_woman += 1
-    age.append(int(element.findtext('age')))
+    age.append(element.findtext('age'))
     major.append(element.findtext('major'))
-    if major == '컴퓨터 공학' or '통계빅데이터':
-        major_major += 1
-
-    for parent in element.getiterator('practicable_computer_languages'):
-        lang_experience+=1
+    for parent in element.iter('practicable_computer_languages'):
         for child in parent:
             lang_name.append(child.get('name'))
-            if lang_name == '파이썬':
-                lang_name_python += 1
             lang_level.append(child.get('level'))
-            if lang_level =='상':
-                lang_level_high += 1
             for ch_child in child:
                 lang_period.append(ch_child.get('value'))
 
-for ages in age:
-    if ages <= 30 :
-        age_20 += 1
-    elif ages > 30 and ages <= 40:
-        age_30 += 1
-    elif ages > 40:
-        age_40 += 1
 
 def student():
     input_menu=input('''학생정보 XML 데이터 분석 시작..
@@ -56,6 +38,7 @@ def student():
     ''')
 
     if input_menu == '1':
+        print('')
         print('<요약정보>')
         print('* 전체 학생수 : %s명'%len(name))
         print('* 성별')
