@@ -2,9 +2,13 @@
 
 import re
 
-text = '120.08.016.300'
+text = '120.08.016.300.1.23'
 
-m = re.sub('\.[0]*', '.', text)
+# m = re.sub('\.[0]*', '.', text)
 # b = m.search(text)
 
-print(m)
+# print(m)
+
+t = re.compile('\.(?=2)\d+')
+r = t.findall(text)
+print(r)

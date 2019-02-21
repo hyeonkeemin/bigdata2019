@@ -114,7 +114,7 @@ def student_system():
     3. 상위 메뉴
     메뉴 입력 : ''')
                 if read_input_menu == '1':
-                    read_personal = input('''
+                    read_condition = input('''
     <검색조건>
     1. ID
     2. 이름
@@ -125,24 +125,28 @@ def student_system():
     7. 컴퓨터 언어 레벨
     8. 상위 메뉴
     메뉴 입력 : ''')
-                    if read_personal == '1':
-                        read_personal_1 = input('검색어를 입력하세요 : ')
 
-                    elif read_personal == '2':
-                        print(profile)
+                    input_search = input('검색어를 입력하세요 : ')
+                    if read_condition == '1':
+                        for a in root.iter('student'):
+                            idc = a.get('ID')
+                            if idc == input_search:
+                                print('%s (%s)' % (a.get('name'), a.get('ID')))
+                                print(' - 성별 : %s' % a.get('sex'))
+                                print(' - 나이 : %s' % a.findtext('age'))
+                                print(' - 전공 : %s' % a.findtext('major'))
+                                for b in a.iter('practicable_computer_languages'):
+                                    if not b:
+                                        print(' - 사용 가능한 언어 : 없음')
+                                    else:
+                                        print(' - 사용 가능한 언어')
+                                        for c in b:
+                                            for d in c:
+                                                print('  > %s (학습기간: %s, Level: %s)' % (c.get('name'), d.get('value'), c.get('level')))
+                    elif read_condition == '2':
+                        for a in root.iter('student'):
+                            idc = a.get('name')
 
-                    elif read_personal == '3':
-                        pass
-                    elif read_personal == '4':
-                        pass
-                    elif read_personal == '5':
-                        pass
-                    elif read_personal == '6':
-                        pass
-                    elif read_personal == '7':
-                        pass
-                    elif read_personal == '8':
-                        continue
 
                 if read_input_menu == '2':
                     pass
@@ -196,7 +200,7 @@ def student_system():
         #     print('학생 정보 분석 완료!')
         #     break
 
-def itt_num():
+def read_check_func():
 
     return
 
