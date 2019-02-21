@@ -1,4 +1,4 @@
-from problem.etree.ElementTree import Element,dump, SubElement
+from xml.etree.ElementTree import Element,dump, SubElement
 
 note = Element('note', date='20120104', to='tove') # 직접 date와 to의 속성정의
 # to = Element('to') # 자식노드
@@ -8,8 +8,9 @@ note = Element('note', date='20120104', to='tove') # 직접 date와 to의 속성
 SubElement(note,'from').text = 'jani' # SubElement를 활용하여 자식 노드 추가
 SubElement(note, 'heading').text = 'reminder'
 SubElement(note, 'body').text = "don't forget me this weekend"
-dump(note)
 
-from problem.etree.ElementTree import ElementTree # xml 파일 쓰기
+# print(note)
+
+from xml.etree.ElementTree import ElementTree # xml 파일 쓰기
 ElementTree(note).write('note.xml')
 

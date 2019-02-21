@@ -1,4 +1,4 @@
-from problem.etree.ElementTree import Element,dump, SubElement
+from xml.etree.ElementTree import Element,dump, SubElement
 
 note = Element('note')
 to = Element('to') # 자식노드
