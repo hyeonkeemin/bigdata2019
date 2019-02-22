@@ -125,34 +125,137 @@ def student_system():
     7. 컴퓨터 언어 레벨
     8. 상위 메뉴
     메뉴 입력 : ''')
-
                     input_search = input('검색어를 입력하세요 : ')
+                    save_list = Element('student_list')
                     if read_condition == '1':
                         for a in root.iter('student'):
                             idc = a.get('ID')
-                            if idc == input_search:
-                                print('%s (%s)' % (a.get('name'), a.get('ID')))
-                                print(' - 성별 : %s' % a.get('sex'))
-                                print(' - 나이 : %s' % a.findtext('age'))
-                                print(' - 전공 : %s' % a.findtext('major'))
-                                for b in a.iter('practicable_computer_languages'):
-                                    if not b:
-                                        print(' - 사용 가능한 언어 : 없음')
-                                    else:
-                                        print(' - 사용 가능한 언어')
-                                        for c in b:
-                                            for d in c:
-                                                print('  > %s (학습기간: %s, Level: %s)' % (c.get('name'), d.get('value'), c.get('level')))
+                            if input_search in idc:
+                                save_list.append(a)
+                                break
                     elif read_condition == '2':
                         for a in root.iter('student'):
                             idc = a.get('name')
+                            if input_search in idc:
+                                save_list.append(a)
+                    elif read_condition == '3':
+                        for a in root.iter('student'):
+                            idc = a.findtext('age')
+                            if input_search in idc:
+                                save_list.append(a)
+                                break
+                    elif read_condition == '4':
+                        for a in root.iter('student'):
+                            idc = a.findtext('major')
+                            if input_search in idc:
+                                save_list.append(a)
+                                break
+                    elif read_condition == '5':
+                        for a in root.iter('student'):
+                            for b in a.iter('language'):
+                                idc = b.get('name')
+                                if input_search in idc:
+                                    save_list.append(a)
+                                    break
+                    elif read_condition == '6':
+                        for a in root.iter('student'):
+                            for b in a.iter('period'):
+                                idc = b.get('value')
+                                if input_search in idc:
+                                    save_list.append(a)
+                                    break
+                    elif read_condition == '7':
+                        for a in root.iter('student'):
+                            for b in a.iter('language'):
+                                idc = b.get('level')
+                                if input_search in idc:
+                                    save_list.append(a)
+                                    break
 
+                    if len(save_list) == 1:
+                        for save_me in save_list.iter('student'):
+                            print('%s (%s)' % (save_me.get('name'), save_me.get('ID')))
+                            print(' - 성별 : %s' % save_me.get('sex'))
+                            print(' - 나이 : %s' % save_me.findtext('age'))
+                            print(' - 전공 : %s' % save_me.findtext('major'))
+                            for b in save_me.iter('practicable_computer_languages'):
+                                if not b:print(' - 사용 가능한 언어 : 없음')
+                                else:print(' - 사용 가능한 언어')
+                                for c in b:
+                                    for d in c:print('  > %s (학습기간: %s, Level: %s)' % (c.get('name'), d.get('value'), c.get('level')))
+                    elif len(save_list) > 1:
+                        for save_me in save_list.iter('student'):
+                            print('%s (%s, %s, %s)'%(save_me.get('ID'),save_me.get('name'),save_me.findtext('age'),save_me.get('sex')))
 
                 if read_input_menu == '2':
-                    pass
+                    print('')
+                    print('<전체 학생 데이터>')
+                    for student_list in profile:
+                        print('%s' % student_list[0])
+                        print(' - 성별 : %s' % student_list[1])
+                        print(' - 나이 : %s' % student_list[2])
+                        print(' - 전공 : %s' % student_list[3])
+                        if not student_list[4]:
+                            print(' - 사용가능한 컴퓨터 언어 : 없음')
+                        if student_list[4]:
+                            print(' - 사용가능한 컴퓨터 언어')
+                            for lang_list in student_list[4]:
+                                print('  > %s (학습기간:%s, Level:%s)' % (lang_list[0], lang_list[2], lang_list[1]))
                 if read_input_menu == '3':
-                    continue
+                    break
 
+        elif input_menu == '4':
+            l_p = 5
+            input_search = input('수정할 학생의 ID를 입력하세요 : ')
+            for student in root.iter('student'):
+                idc = student.get('ID')
+                if input_search in idc:
+                    print('1 . 이름 : %s'%student.get('name'))
+                    print('2 . 성별 : %s'%student.get('sex'))
+                    print('3 . 나이 : %s' % student.findtext('age'))
+                    print('4 . 전공 : %s' % student.findtext('major'))
+                    for prac in student.iter('practicable_computer_languages'):
+                        if not prac:print('5 . 사용 가능한 언어 : 없음')
+                        else:print(' - 사용 가능한 언어')
+                        for lang in prac:
+                            for peri in lang:
+                                print(l_p,'. > %s'%lang.get('name'))
+                                print(l_p+1,'. > %s'%peri.get('value'))
+                                print(l_p+2,'. > %s'%lang.get('level'))
+                                l_p += 3
+
+                    revise_num = int(input('수정할 항목의 번호를 입력하세요 : '))
+                    revise_content = input('수정할 항목의 값을 입력하세요 : ')
+
+                    if revise_num == 1:
+                        student.set('name', revise_content)
+                    elif revise_num == 2:
+                        student.set('sex', revise_content)
+                    elif revise_num == 3:
+                        re = student.find('age')
+                        re.text = revise_content
+                    elif revise_num == 4:
+                        re = student.find('major')
+                        re.text = revise_num
+                    elif 5 <= revise_num % 3 == 2:
+                        for lang in student.iter('language'):
+
+
+
+                    for save_me in student.iter('student'):
+                        print('%s (%s)' % (save_me.get('name'), save_me.get('ID')))
+                        print(' - 성별 : %s' % save_me.get('sex'))
+                        print(' - 나이 : %s' % save_me.findtext('age'))
+                        print(' - 전공 : %s' % save_me.findtext('major'))
+                        for b in save_me.iter('practicable_computer_languages'):
+                            if not b:
+                                print(' - 사용 가능한 언어 : 없음')
+                            else:
+                                print(' - 사용 가능한 언어')
+                            for c in b:
+                                for d in c: print(
+                                    '  > %s (학습기간: %s, Level: %s)' % (c.get('name'), d.get('value'), c.get('level')))
+                    break
 
 
 
@@ -168,41 +271,4 @@ def student_system():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # elif input_menu == '2':
-        #     print('')
-        #     print('<전체 학생 데이터>')
-        #     for student_list in profile:
-        #         print('%s'%student_list[0])
-        #         print(' - 성별 : %s'%student_list[1])
-        #         print(' - 나이 : %s'%student_list[2])
-        #         print(' - 전공 : %s'%student_list[3])
-        #         if not student_list[4]:
-        #             print(' - 사용가능한 컴퓨터 언어 : 없음')
-        #         if student_list[4]:
-        #             print(' - 사용가능한 컴퓨터 언어')
-        #             for lang_list in student_list[4]:
-        #                 print('  > %s (학습기간:%s, Level:%s)'%(lang_list[0],lang_list[2],lang_list[1]))
-        # elif input_menu == '3':
-        #     print('')
-        #     print('학생 정보 분석 완료!')
-        #     break
-
-def read_check_func():
-
-    return
-
 student_system()
-# print(profile)
