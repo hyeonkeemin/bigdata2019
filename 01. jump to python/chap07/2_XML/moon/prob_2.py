@@ -48,16 +48,9 @@ for i in root.findall('student'):
 def student_system():
     while True:
         input_menu=input('''
-        학생정보 XML 데이터 분석 시작..
-        
+        학생정보 XML 데이터 분석 시작..\n
         [메인 메뉴]
-        1. 요약 정보
-        2. 입력
-        3. 조회
-        4. 수정
-        5. 삭제
-        6. 종료
-        메뉴 입력 : ''')
+        1. 요약 정보\n2. 입력\n3. 조회\n4. 수정\n5. 삭제\n6. 종료\n메뉴 입력 : ''')
         if input_menu == '1':
             print('')
             print('<요약정보>')
@@ -109,22 +102,11 @@ def student_system():
             while True:
                 read_input_menu = input('''
     <조회 서브 메뉴>
-    1. 개별 학생 조회
-    2. 전체 학생 조회
-    3. 상위 메뉴
-    메뉴 입력 : ''')
+    1. 개별 학생 조회\n2. 전체 학생 조회\n3. 상위 메뉴\n메뉴 입력 : ''')
                 if read_input_menu == '1':
                     read_condition = input('''
     <검색조건>
-    1. ID
-    2. 이름
-    3. 나이
-    4. 전공
-    5. 컴퓨터 언어 명
-    6. 컴퓨터 언어 학습 기간
-    7. 컴퓨터 언어 레벨
-    8. 상위 메뉴
-    메뉴 입력 : ''')
+    1. ID\n2. 이름\n3. 나이\n4. 전공\n5. 컴퓨터 언어 명\n6. 컴퓨터 언어 학습 기간\n7. 컴퓨터 언어 레벨\n8. 상위 메뉴\n메뉴 입력 : ''')
                     input_search = input('검색어를 입력하세요 : ')
                     save_list = Element('student_list')
                     if read_condition == '1':
@@ -236,11 +218,20 @@ def student_system():
                         re.text = revise_content
                     elif revise_num == 4:
                         re = student.find('major')
-                        re.text = revise_num
-                    elif 5 <= revise_num % 3 == 2:
+                        re.text = revise_content
+                    elif revise_num >= 5 and revise_num % 3 == 2:
                         for lang in student.iter('language'):
-
-
+                            if revise_num:
+                                lang.set('name', revise_content)
+                    elif revise_num >= 5 and revise_num % 3 == 0:
+                        for lang in student.iter('period'):
+                            if revise_num:
+                                lang.set('value', revise_content)
+                            else:
+                    elif revise_num >= 5 and revise_num % 3 == 1:
+                        for lang in student.iter('language'):
+                            if revise_num:
+                                lang.set('level', revise_content)
 
                     for save_me in student.iter('student'):
                         print('%s (%s)' % (save_me.get('name'), save_me.get('ID')))
@@ -255,7 +246,6 @@ def student_system():
                             for c in b:
                                 for d in c: print(
                                     '  > %s (학습기간: %s, Level: %s)' % (c.get('name'), d.get('value'), c.get('level')))
-                    break
 
 
 
