@@ -1,3 +1,5 @@
-for i in range(0,3):
-    print(i)
+# 5 : 1번
+# 8 : 2번
 
+
+for i in

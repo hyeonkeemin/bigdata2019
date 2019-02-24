@@ -208,6 +208,7 @@ def student_system():
 
                     revise_num = int(input('수정할 항목의 번호를 입력하세요 : '))
                     revise_content = input('수정할 항목의 값을 입력하세요 : ')
+                    index=[]
 
                     if revise_num == 1:
                         student.set('name', revise_content)
@@ -221,31 +222,35 @@ def student_system():
                         re.text = revise_content
                     elif revise_num >= 5 and revise_num % 3 == 2:
                         for lang in student.iter('language'):
-                            if revise_num:
-                                lang.set('name', revise_content)
+                            index.append(lang.get('name'))
+                            if (revise_num // 3) == len(index):
+                                index[(revise_num // 3) - 1] = revise_content
+                            for re_lang in index:
+                                lang.set('name', re_lang)
                     elif revise_num >= 5 and revise_num % 3 == 0:
                         for lang in student.iter('period'):
-                            if revise_num:
-                                lang.set('value', revise_content)
-                            else:
+                            index.append(lang.get('value'))
+                            if (revise_num // 3) == len(index)+1:
+                                index[(revise_num // 3) - 2] = revise_content
+                            for re_lang in index:
+                                lang.set('value', re_lang)
                     elif revise_num >= 5 and revise_num % 3 == 1:
                         for lang in student.iter('language'):
-                            if revise_num:
-                                lang.set('level', revise_content)
-
+                            index.append(lang.get('level'))
+                            if (revise_num  // 3) == len(index)+1:
+                                index[(revise_num // 3) - 2] = revise_content
+                            for re_lang in index:
+                                lang.set('level', re_lang)
                     for save_me in student.iter('student'):
                         print('%s (%s)' % (save_me.get('name'), save_me.get('ID')))
                         print(' - 성별 : %s' % save_me.get('sex'))
                         print(' - 나이 : %s' % save_me.findtext('age'))
                         print(' - 전공 : %s' % save_me.findtext('major'))
                         for b in save_me.iter('practicable_computer_languages'):
-                            if not b:
-                                print(' - 사용 가능한 언어 : 없음')
-                            else:
-                                print(' - 사용 가능한 언어')
+                            if not b:print(' - 사용 가능한 언어 : 없음')
+                            else:print(' - 사용 가능한 언어')
                             for c in b:
-                                for d in c: print(
-                                    '  > %s (학습기간: %s, Level: %s)' % (c.get('name'), d.get('value'), c.get('level')))
+                                for d in c: print('  > %s (학습기간: %s, Level: %s)' % (c.get('name'), d.get('value'), c.get('level')))
 
 
 
