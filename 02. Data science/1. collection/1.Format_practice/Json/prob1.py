@@ -59,6 +59,7 @@ while True:
                     print('     강사 : %s ' % lesson_list['teacher'])
                     print('     개강일 : %s' % lesson_list['open_date'])
                     print('     종료일 : %s\n' % lesson_list['close_date'])
+                continue
         else:
             if read_menu=='10':
                 continue
@@ -122,35 +123,78 @@ while True:
                     print('>> 학생 ID : %s, 학생 이름: %s' % (i['student_ID'], i['student_name']))
 
     elif menu == '3':
-        search_id = input('\n수정할 학생의 ID를 입력하세요 : ')
         while True:
+            search_id = input('\n수정할 학생의 ID를 입력하세요(종료는 "enter"입력) : ')
+            if search_id == '':
+                break
             for search_list in json_data:
                 if search_id == search_list['student_ID']:
                     input_update_menu = input('''1. 학생 이름\n2: 나이\n3. 주소\n4. 과거 수강 횟수\n5. 현재 수강 중인 강의 정보\n0. 이전 메뉴\n메뉴 번호를 입력하세요 : ''')
                     if input_update_menu == '0':break
-                    elif input_update_menu == '1':pass
-                    elif input_update_menu == '2':pass
-                    elif input_update_menu == '3':pass
-                    elif input_update_menu == '4':pass
                     elif input_update_menu == '5':
                         index = 1
                         print('\n<현재 수강중인 강의 정보>')
                         for presnt_lecture in search_list['total_course_info']['learning_course_info']:
-                            print(str(index)+'.','강의 코드 : %s' % presnt_lecture['course_code'])
-                            print(str(index+1)+'.', '강의명 : %s' % presnt_lecture['course_name'])
-                            print(str(index+2)+'.', '강사 : %s' % presnt_lecture['teacher'])
-                            print(str(index+3)+'.', '개강일 : %s' % presnt_lecture['open_date'])
-                            print(str(index+4)+'.', '종료일 : %s\n' % presnt_lecture['close_date'])
+                            print(str(index)+'.', '종료일 : %s' % presnt_lecture['close_date'])
+                            print(str(index + 1) + '.', '강의 코드 : %s' % presnt_lecture['course_code'])
+                            print(str(index + 2) + '.', '강의명 : %s' % presnt_lecture['course_name'])
+                            print(str(index + 3) + '.', '개강일 : %s' % presnt_lecture['open_date'])
+                            print(str(index + 4) + '.', '강사 : %s\n' % presnt_lecture['teacher'])
                             index += 5
-                        want_update_menu = input('변경을 원하는 메뉴를 선택하세요 : ')
-                        for presnt_lecture in search_list['total_course_info']['learning_course_info']:
-                            pass
+                        want_update_menu = int(input('변경을 원하는 메뉴를 선택하세요 : '))
+                        want_update = input('변경할 값을 입력하세요 : ')
+                        process_num = 0
+                        for present_lecture in search_list['total_course_info']['learning_course_info']:
+                            for index_lecture in present_lecture.values():
+                                process_num += 1
+                                if process_num == want_update_menu:
+                                    pass
 
+                    else:
+                        want_update_firststep = input('변경할 값을 입력하세요 : ')
+                        if input_update_menu == '1':
+                            search_list['student_ID'] = want_update_firststep
+                        elif input_update_menu == '2':
+                            search_list['student_age'] = int(want_update_firststep)
+                        elif input_update_menu == '3':
+                            search_list['address'] = want_update_firststep
+                        elif input_update_menu == '4':
+                            search_list['total_course_info']['num_of_course_learned'] = int(want_update_firststep)
 
-
+                    print('\n* 학생 ID : %s' % search_list['student_ID'])
+                    print('* 이름 : %s' % search_list['student_name'])
+                    print('* 나이 : %s' % search_list['student_age'])
+                    print('* 주소 : %s' % search_list['address'])
+                    print('* 수강 정보')
+                    print('  + 과거 수강 횟수 : %s' % search_list['total_course_info']['num_of_course_learned'])
+                    print('  + 현재 수강 과목')
+                    for lesson_list in search_list['total_course_info']['learning_course_info']:
+                        print('     강의 코드 : %s' % lesson_list['course_code'])
+                        print('     강의명 : %s' % lesson_list['course_name'])
+                        print('     강사 : %s ' % lesson_list['teacher'])
+                        print('     개강일 : %s' % lesson_list['open_date'])
+                        print('     종료일 : %s\n' % lesson_list['close_date'])
+                    break
 
     elif menu == '4':
-        pass
+        while True:
+            del_id = input('\n삭제할 학생의 ID를 입력하세요(종료는 "enter" 입력) : ')
+            if del_id == '':break
+            else:
+                for del_list in json_data:
+                    if del_id == del_list['student_ID']:
+                        del_menu = input('''\n삭제 유형을 선택하세요.\n1. 전체 삭제\n2. 현재 수강중인 특정 과목 정보 삭제\n3. 이전 메뉴\n메뉴를 입력하세요 : ''')
+                        if del_menu == '1':
+                            del
+                            break
+                        elif del_menu == '2':
+                            del_lecure = input('삭제할 강의 코드를 입력하세요 : ')
+                            for del_list_lecture in del_list['total_course_info']['learning_course_info']:
+                                if del_lecure == del_list_lecture['course_code']:
+                                    del_list_lecture.clear()
+                                    break
+                        elif del_menu == '3':
+                            break
 
     elif menu == '5':
         with open('ITT_Student.json', 'w', encoding='utf8') as outfile:
@@ -158,7 +202,3 @@ while True:
             outfile.write(readable_result)
             print('ITT_Student.json SAVED')
             break
-
-
-
-

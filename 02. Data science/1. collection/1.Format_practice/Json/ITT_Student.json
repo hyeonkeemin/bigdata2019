@@ -61,27 +61,9 @@
         }
     },
     {
-        "address": "경북 경산시 진량읍 상림2길",
-        "student_ID": "ITT004",
-        "student_age": 28,
-        "student_name": "민현기",
-        "total_course_info": {
-            "learning_course_info": [
-                {
-                    "close_date": "2019-04-28",
-                    "course_code": "IB12345",
-                    "course_name": "빅데이터",
-                    "open_date": "2019-01-28",
-                    "teacher": "이현구"
-                }
-            ],
-            "num_of_course_learned": 0
-        }
-    },
-    {
         "address": "대구",
         "student_ID": "ITT005",
-        "student_age": 23,
+        "student_age": 43,
         "student_name": "민현기",
         "total_course_info": {
             "learning_course_info": [
@@ -98,6 +80,24 @@
                     "course_name": "IoT 시스템",
                     "open_date": "2018-03-21",
                     "teacher": "박휘순"
+                }
+            ],
+            "num_of_course_learned": 0
+        }
+    },
+    {
+        "address": "경산",
+        "student_ID": "ITT006",
+        "student_age": 28,
+        "student_name": "민현기",
+        "total_course_info": {
+            "learning_course_info": [
+                {
+                    "close_date": "1432-14-23",
+                    "course_code": "IRE13",
+                    "course_name": "빅데이터",
+                    "open_date": "1934-23-14",
+                    "teacher": "이현구"
                 }
             ],
             "num_of_course_learned": 0
