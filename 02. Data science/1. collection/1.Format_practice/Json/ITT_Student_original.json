@@ -45,7 +45,7 @@
     {
         "address": "동구 신암동",
         "student_ID": "ITT003",
-        "student_age": "29",
+        "student_age": 29,
         "student_name": "전민하",
         "total_course_info": {
             "learning_course_info": [
@@ -57,7 +57,7 @@
                     "teacher": "이현구"
                 }
             ],
-            "num_of_course_learned": "2"
+            "num_of_course_learned": 2
         }
     }
 ]
