@@ -134,21 +134,21 @@ while True:
                     elif input_update_menu == '5':
                         index = 1
                         print('\n<현재 수강중인 강의 정보>')
-                        for presnt_lecture in search_list['total_course_info']['learning_course_info']:
-                            print(str(index)+'.', '종료일 : %s' % presnt_lecture['close_date'])
-                            print(str(index + 1) + '.', '강의 코드 : %s' % presnt_lecture['course_code'])
-                            print(str(index + 2) + '.', '강의명 : %s' % presnt_lecture['course_name'])
-                            print(str(index + 3) + '.', '개강일 : %s' % presnt_lecture['open_date'])
-                            print(str(index + 4) + '.', '강사 : %s\n' % presnt_lecture['teacher'])
+                        for present_lecture in search_list['total_course_info']['learning_course_info']:
+                            print(str(index)+'.', '종료일 : %s' % present_lecture['close_date'])
+                            print(str(index + 1) + '.', '강의 코드 : %s' % present_lecture['course_code'])
+                            print(str(index + 2) + '.', '강의명 : %s' % present_lecture['course_name'])
+                            print(str(index + 3) + '.', '개강일 : %s' % present_lecture['open_date'])
+                            print(str(index + 4) + '.', '강사 : %s\n' % present_lecture['teacher'])
                             index += 5
                         want_update_menu = int(input('변경을 원하는 메뉴를 선택하세요 : '))
                         want_update = input('변경할 값을 입력하세요 : ')
                         process_num = 0
                         for present_lecture in search_list['total_course_info']['learning_course_info']:
-                            for index_lecture in present_lecture.values():
+                            for index_lecture_key in present_lecture.keys():
                                 process_num += 1
                                 if process_num == want_update_menu:
-                                    pass
+                                    present_lecture[index_lecture_key] = want_update
 
                     else:
                         want_update_firststep = input('변경할 값을 입력하세요 : ')
@@ -185,13 +185,13 @@ while True:
                     if del_id == del_list['student_ID']:
                         del_menu = input('''\n삭제 유형을 선택하세요.\n1. 전체 삭제\n2. 현재 수강중인 특정 과목 정보 삭제\n3. 이전 메뉴\n메뉴를 입력하세요 : ''')
                         if del_menu == '1':
-                            del
+                            json_data.remove(del_list)
                             break
                         elif del_menu == '2':
-                            del_lecure = input('삭제할 강의 코드를 입력하세요 : ')
+                            del_lecture = input('삭제할 강의 코드를 입력하세요 : ')
                             for del_list_lecture in del_list['total_course_info']['learning_course_info']:
-                                if del_lecure == del_list_lecture['course_code']:
-                                    del_list_lecture.clear()
+                                if del_lecture == del_list_lecture['course_code']:
+                                    del_list['total_course_info']['learning_course_info'].remove(del_list_lecture)
                                     break
                         elif del_menu == '3':
                             break

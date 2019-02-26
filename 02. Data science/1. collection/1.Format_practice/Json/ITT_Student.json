@@ -73,13 +73,6 @@
                     "course_name": "빅데이터 실무",
                     "open_date": "2019-01-12",
                     "teacher": "이현구"
-                },
-                {
-                    "close_date": "2019-06-21",
-                    "course_code": "ICV13445",
-                    "course_name": "IoT 시스템",
-                    "open_date": "2018-03-21",
-                    "teacher": "박휘순"
                 }
             ],
             "num_of_course_learned": 0
