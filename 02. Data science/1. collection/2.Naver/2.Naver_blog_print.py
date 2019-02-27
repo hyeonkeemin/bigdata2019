@@ -42,7 +42,7 @@ def getPostData(post,jsonResult):
     bloggername = post['bloggername']
     link = post['link']
 
-    pDate = datetime.datetime.strptime(post['postdate'], '%Y-%m-%d')
+    pDate = datetime.datetime.strptime(post['postdate'], )
     pDate = pDate.strftime('%Y-%m-%d %H:%M:%S')
 
     jsonResult.append({'title': title, 'description': description, 'bloggerlink':bloggerlink, 'bloggername':bloggername, 'postdate':pDate})
