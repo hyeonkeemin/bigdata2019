@@ -7,18 +7,23 @@ html = urllib.request.urlopen('https://movie.naver.com/movie/sdb/rank/rmovie.nhn
 soup = BeautifulSoup(html, 'html.parser')
 
 tag_str = str(soup)
-# name_type = re.compile('title=["](?P<name>.+)["][>](?P=name)')
-# up_down_type = re.compile('alt=["]([a-z]+)["]')
-# change_type = re.compile('"range ac"[>](\w+)[<]/td')
-# name = name_type.findall(tag_str)
-# up_down = up_down_type.findall(tag_str)
-# up_down.pop(0)
-# change = change_type.findall(tag_str)
-# change.pop(0)
+name_type = re.compile('title=["](?P<name>.+)["][>](?P=name)')
+up_down_type = re.compile('alt=["]([a-z]+)["]')
+change_type = re.compile('"range ac"[>](\w+)[<]/td')
+name = name_type.findall(tag_str)
+up_down = up_down_type.findall(tag_str)
+up_down.pop(0)
+change = change_type.findall(tag_str)
+change.pop(0)
 
-NAME=[];UP_DOWN=[];CHANGE=[]
-TYPE = re.compile('title=["]((?P<name>.+))["][>](?P=name)\s+alt=["]([a-z]+)\s+range ac"[>](\w+)[<]/td')
-b = TYPE.findall(tag_str)
+# print(name)
+# print(up_down)
+# print(change)
+
+
+# NAME=[];UP_DOWN=[];CHANGE=[]
+# TYPE = re.compile('title=["]((?P<name>.+))["][>](?P=name)\s+alt=["]([a-z]+)\s+range ac"[>](\w+)[<]/td')
+# b = TYPE.findall(tag_str)
 # if TYPE.groups(1):
 #     NAME.append(TYPE.groups(1))
 # elif TYPE.groups(2):
@@ -30,7 +35,7 @@ b = TYPE.findall(tag_str)
 # print(UP_DOWN)
 # print(CHANGE)
 
-print(b)
+# print(name)
 
 
 
