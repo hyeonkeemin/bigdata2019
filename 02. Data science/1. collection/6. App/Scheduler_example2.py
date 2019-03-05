@@ -28,7 +28,8 @@ def update_scheduler():
         if g_AI_Mode == False:
             continue
         else:
-            time.sleep(5)
+            time.sleep(3)
+            print('발코니 상태 변경')
             g_Balcony_Windows = not g_Balcony_Windows
 
 while True:

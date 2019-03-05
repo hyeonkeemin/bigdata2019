@@ -1,6 +1,7 @@
 from Weather_Realtime_info_for_student import *
-from naver_livesearch_rank import *
+# from naver_livesearch_rank import *
 from bus_system import *
+from weather_ai import *
 
 g_Radiator = False
 g_Gas_Valve = False
@@ -69,8 +70,10 @@ def smart_mode():
     if menu_num == 2:
         g_AI_Mode = not g_AI_Mode
         print('\n현재 인공지능 모드 : ', end='')
-        if g_AI_Mode == True: print('작동')
+        if g_AI_Mode == True:
+            print('작동')
         else:print('중지')
+
     elif menu_num == 3:
         print('\n1. 실시간 기상정보 업데이트')
         print('2. 네이버 실시간 검색어 확인')
@@ -79,7 +82,8 @@ def smart_mode():
         if menu_num_ai == 1:
             get_realtime_wather_info()
         elif menu_num_ai == 2:
-            naver_livesearch_rank()
+            # naver_livesearch_rank()
+            pass
         elif menu_num_ai == 3:
             bus_main()
 
