@@ -1,5 +1,6 @@
 from Weather_Realtime_info_for_student import *
 from naver_livesearch_rank import *
+from bus_system import *
 
 g_Radiator = False
 g_Gas_Valve = False
@@ -80,7 +81,7 @@ def smart_mode():
         elif menu_num_ai == 2:
             naver_livesearch_rank()
         elif menu_num_ai == 3:
-            pass
+            bus_main()
 
 
 print('스마트 홈 네트워크 시뮬레이션 프로그램')

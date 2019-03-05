@@ -2,7 +2,6 @@ from xml.etree.ElementTree import parse, Element, SubElement, dump
 
 tree = parse('sample.xml')
 root = tree.getroot()
-
 profile = []
 man=0;woman=0
 major_major=0
