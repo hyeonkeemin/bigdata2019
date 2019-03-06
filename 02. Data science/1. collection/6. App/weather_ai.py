@@ -25,6 +25,8 @@ def terminate_ai_mode():
 
 def update_weather_scheduler():
     global g_Balcony_Windows
+    global g_AI_Mode
+
     while True:
         if g_AI_Mode == False:
             continue
@@ -40,11 +42,11 @@ def update_weather_scheduler():
             index = 0
             for i in json_weather_data:
                 index += 1
-                if index % 4 == 1:
+                if index % 4 == 2:
                     data.append(i)
 
             slicing = data[0]
-            print('%s년 %s월 %s일 %s시 %s분 기상정보' % (
+            print('\n%s년 %s월 %s일 %s시 %s분 기상정보' % (
             str(slicing['fcstDate'])[0:4], str(slicing['fcstDate'])[4:6], str(slicing['fcstDate'])[6:8],
             str(slicing['fcstTime'])[0:2], str(slicing['fcstTime'])[2:4]))
 
@@ -64,7 +66,7 @@ def update_weather_scheduler():
                     print('습도는 %s%% 입니다.' % i['fcstValue'])
                 elif i['category'] == 'PTY':
                     if i['fcstValue'] == 0:
-                        pass
+                        print('비는 내리지 않겠습니다.')
                     elif i['fcstValue'] == 1:
                         print('비가 내리겠습니다.')
                     elif i['fcstValue'] == 2:
@@ -73,25 +75,24 @@ def update_weather_scheduler():
                         print('눈이 내리겠습니다.')
 
             if g_Balcony_Windows == False:
-                select = input('창문을 여시겠습니까?(y/n)')
-                if select == 'y':
-                    print('창문을 열겠습니다.')
+                if data[3]['fcstValue'] <= 2 and data[4]['fcstValue'] >= 10 and data[1]['fcstValue'] == 0 and data[5]['fcstValue'] <= 50:
+                    print('\n날씨 예보를 분석하여 자동으로 창문을 열겠습니다.')
                     g_Balcony_Windows = not g_Balcony_Windows
-                elif select == 'n':
-                    print('창문 닫아놓겠습니다.')
-            elif g_Balcony_Windows == True:
-                select = input('창문을 닫으시겠습니까?(y/n) : ')
-                if select == 'y':
-                    print('창문을 닫겠습니다.')
-                    g_Balcony_Windows = not g_Balcony_Windows
-                elif select == 'n':
-                    print('창문 열어놓겠습니다.')
 
-while True:
+            elif g_Balcony_Windows == True:
+                if data[3]['fcstValue'] >= 2 and data[4]['fcstValue'] <= 10 and data[1]['fcstValue'] != 0 and data[5]['fcstValue'] >= 50:
+                    print('\n창문을 닫겠습니다.')
+                    g_Balcony_Windows = not g_Balcony_Windows
+
+
+
+
+def main_ai():
+    global g_AI_Mode
     g_AI_Mode = not g_AI_Mode
     if g_AI_Mode == True:
-        print("인공지능 모드가 작동 되었습니다. 30분마다 자동으로 날씨 정보를 얻고 창문을 열고 닫을 수 있습니다.")
-        ai_scheduler = threading.Thread(target=update_weather_scheduler())
+        print("인공지능 모드가 작동 되었습니다. 30분마다 자동으로 날씨 정보를 얻고 자동으로 창문을 제어합니다.")
+        ai_scheduler = threading.Thread(target=update_weather_scheduler)
         ai_scheduler.daemon = True
         ai_scheduler.start()
     else:
@@ -101,3 +102,7 @@ while True:
             except:
                 pass
         print("인공지능 모드 정지")
+
+
+if __name__ == '__main__':
+    main_ai()
