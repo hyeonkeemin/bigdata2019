@@ -1,7 +1,7 @@
 from Weather_Realtime_info_for_student import *
 from naver_livesearch_rank import *
 from bus_system import *
-from weather_ai import *
+from weather_ai_sam import *
 import threading
 
 g_Radiator = False
@@ -73,7 +73,10 @@ def smart_mode():
         print('\n현재 인공지능 모드 : ', end='')
         if g_AI_Mode == True:
             print('작동')
-            main_ai()
+            print('인공지능 모드가 작동되었습니다. 30분마다 자동으로 날씨 정보를 얻고 자동으로 창문을 제어합니다.')
+            ai_scheduler = threading.Thread(target=update_weather_scheduler)
+            ai_scheduler.daemon = True
+            ai_scheduler.start()
         else:print('중지')
 
     elif menu_num == 3:

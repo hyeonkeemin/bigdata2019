@@ -33,7 +33,8 @@ def analysis():
         try: count[i] += 1
         except: count[i] = 1
 
-    print(sorted(count.items(), key=lambda x: x[1]),reversed(True))
+    print('도메인 별 기사 분석 : ')
+    print(count)
 
 
 analysis()

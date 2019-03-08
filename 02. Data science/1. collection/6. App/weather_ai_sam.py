@@ -3,8 +3,8 @@ import ctypes
 import time
 from Weather_Realtime_info_for_student import *
 
+g_AI_Mode = True
 g_Balcony_Windows = False
-g_AI_Mode = False
 
 def terminate_ai_mode():
     """Terminates a python thread from another thread.
@@ -32,7 +32,6 @@ def update_weather_scheduler():
             continue
         else:
             time.sleep(5)
-
             get_Realtime_Weather_Info()
             with open('동구_신암동_초단기예보조회.json', encoding='UTF8') as json_file:
                 json_object = json.load(json_file)
@@ -41,10 +40,16 @@ def update_weather_scheduler():
 
             data = []
             index = 0
-            for i in json_weather_data:
-                index += 1
-                if index % 4 == 2:
-                    data.append(i)
+            if len(json_weather_data) == 40 :
+                for i in json_weather_data:
+                    index += 1
+                    if index % 4 == 2:
+                        data.append(i)
+            elif len(json_weather_data) == 30:
+                for i in json_weather_data:
+                    index += 1
+                    if index % 3 == 2:
+                        data.append(i)
 
             slicing = data[0]
             print('\n%s년 %s월 %s일 %s시 %s분 기상정보' % (
@@ -85,25 +90,5 @@ def update_weather_scheduler():
                     print('\n창문을 닫겠습니다.')
                     g_Balcony_Windows = not g_Balcony_Windows
 
+update_weather_scheduler()
 
-
-
-def main_ai():
-    global g_AI_Mode
-    g_AI_Mode = not g_AI_Mode
-    if g_AI_Mode == True:
-        print("인공지능 모드가 작동 되었습니다. 30분마다 자동으로 날씨 정보를 얻고 자동으로 창문을 제어합니다.")
-        ai_scheduler = threading.Thread(target=update_weather_scheduler)
-        ai_scheduler.daemon = True
-        ai_scheduler.start()
-    else:
-        while ai_scheduler.is_alive():
-            try:
-                terminate_ai_mode()
-            except:
-                pass
-        print("인공지능 모드 정지")
-
-
-if __name__ == '__main__':
-    main_ai()
