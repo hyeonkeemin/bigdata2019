@@ -9,7 +9,4 @@ data = []
 index = 0
 print(len(json_weather_data))
 
-for i in json_weather_data:
-    index += 1
-    if index % 4 == 2:
-        data.append(i)
+
