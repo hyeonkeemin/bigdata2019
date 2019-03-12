@@ -1,29 +1,22 @@
 import pandas
-import sqlite3
-from xml.etree.ElementTree import SubElement, parse
+import sys
+import MySQLdb
 
-input_file = 'Student_Info_DB_Scheme.xlsx'
-output_file = 'Sudent_info_DB_Scheme_result.xls'
+con = MySQLdb.connect(host='localhost', port=3306, db='student_info', user='a', passwd='1111',charset='utf8mb4')
+c = con.cursor()
 
-tree = parse('students_info_ver2.xml')
-root = tree.getroot()
+input_file = sys.argv[1] # Student_Info_DB_Scheme.xlsx
 
-xml_data = []
+data_frame = pandas.read_excel('Student_Info_DB_Scheme.xlsx')
 
-for info in root.iter('student'):
-    data_list = []
-    data_list.append(info.get('ID'))
-    data_list.append(info.get('name'))
-    data_list.append(info.get('sex'))
-    data_list.append(info.findtext('age'))
-    data_list.append(info.findtext('major'))
+data=[]
+for row_index in range(len(data_frame)):
+    data.append(list(data_frame.loc[row_index]))
 
-    for info_2 in root.iter('language'):
-
-
-print(xml_data)
-
-data_frame = pandas.read_excel(input_file)
+for i in range(len(data)):
+    print(data[i])
+    c.execute('INSERT INTO Students VALUES ("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s");'%(data[i][0],data[i][1],data[i][2],data[i][3],data[i][4],data[i][5],data[i][6],data[i][7]))
+con.commit()
 
 
 

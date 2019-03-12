@@ -21,10 +21,10 @@ for row in file_reader:
 con.commit()
 
 # Query the Suppliers table
-c.execute("SELECT * FROM Suppliers")
-rows = c.fetchall()
-for row in rows:
-    output = []
-    for column_index in range(len(row)):
-        output.append(str(row[column_index]))
-    print(output)
+# c.execute("SELECT * FROM Suppliers")
+# rows = c.fetchall()
+# for row in rows:
+#     output = []
+#     for column_index in range(len(row)):
+#         output.append(str(row[column_index]))
+#     print(output)
