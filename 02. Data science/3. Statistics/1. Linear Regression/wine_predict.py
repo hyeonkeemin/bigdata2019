@@ -16,11 +16,12 @@ new_observations = wine.loc[wine.index.isin(range(len(wine))), independent_varia
 y_predicted = lm.predict(new_observations)
 y_predicted_rounded = [round(score) for score in y_predicted]
 
-print(lm.summary())
-print('')
+print(y_predicted)
+# print(lm.summary())
+# print('')
 
-print('결정계수: %s' % round(lm.rsquared_adj, 5))
-print('F-statistic: %.1f // P-value: %.2f' % (lm.fvalue, lm.f_pvalue))
+# print('결정계수: %s' % round(lm.rsquared_adj, 5))
+# print('F-statistic: %.1f // P-value: %.2f' % (lm.fvalue, lm.f_pvalue))
 
 
 
