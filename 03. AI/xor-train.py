@@ -1,4 +1,4 @@
-# SVM : 대표적인 비지도학습
+# SVM : 대표적인 지도학습
 from sklearn import svm
 xor_data = [
     [0, 0, 0],
