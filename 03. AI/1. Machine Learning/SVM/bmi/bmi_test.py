@@ -1,11 +1,11 @@
 from sklearn import svm, metrics
 from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
 import pandas as pd
+
 # 키와 몸무게 데이터 읽어 들이기 --- (※1)
-tbl = pd.read_csv("bmi.csv")
+tbl = pd.read_csv("bmi_test.csv")
 # 칼럼(열)을 자르고 정규화하기 --- (※2)
-label = tbl["label"]
+label = tbl["type"]
 w = tbl["weight"] / 100 # 최대 100kg라고 가정
 h = tbl["height"] / 200 # 최대 200cm라고 가정
 wh = pd.concat([w, h], axis=1)
