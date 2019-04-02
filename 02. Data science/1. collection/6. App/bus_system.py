@@ -122,7 +122,8 @@ def Make_BusInfo_Xml(nodeID):
 
 
 def bus_main():
-    nodeNm = input('확인할 버스 정류장을 입력하세요 : ')
+    print('\n<<<< 실시간 버스 정보 시스템 >>>>')
+    nodeNm = input('\n확인할 버스 정류장을 입력하세요 : ')
     Make_ID_Json(nodeNm)
 
     index = 0

@@ -1,7 +1,7 @@
 from Weather_Realtime_info_for_student import *
 from naver_livesearch_rank import *
 from bus_system import *
-from weather_ai_sam import *
+from weather_ai import *
 import threading
 
 g_Radiator = False

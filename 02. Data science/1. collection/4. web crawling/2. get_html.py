@@ -13,7 +13,8 @@ soup = BeautifulSoup(response.content, 'html.parser')
 table = soup.find('table',{'class':'table_develop3'})
 data = [] # 데이터를 저장할 리스트 생성
 
-def data_correction(org_text) : # 데이터 보정 작업
+# 데이터 보정 작업
+def data_correction(org_text) :
     if org_text == '\xa0':
         return 'N/A'
     return org_text
@@ -43,9 +44,8 @@ for tr in table.find_all('tr'):
             # data 리스트에 가져온거 추가
             data.append([point,cloud,visibility,temperature,wd_temp, humidity, wind_dr, wind_speed])
 
-
-# 습도, 풍향, 풍속을 추가해서 테이블 형태로 출력해보셈
 # print(data)
-print('지점     현재일기      현재기온      체감온도      습도      풍향      풍속')
+print("['지점', '현재일기', '현재기온', '체감온도', '습도', '풍향', '풍속']")
 for i in data:
     print(i)
+
