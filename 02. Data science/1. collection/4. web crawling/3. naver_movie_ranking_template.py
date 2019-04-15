@@ -7,17 +7,17 @@ html = urllib.request.urlopen('https://movie.naver.com/movie/sdb/rank/rmovie.nhn
 soup = BeautifulSoup(html, 'html.parser')
 
 tag_str = str(soup)
-name_type = re.compile('title=["](?P<name>.+)["][>](?P=name)')
+# name_type = re.compile('title=["](?P<name>.+)["][>](?P=name)')
 up_down_type = re.compile('alt=["]([a-z]+)["]')
-change_type = re.compile('"range ac"[>](\w+)[<]/td')
-name = name_type.findall(tag_str)
+# change_type = re.compile('"range ac"[>](\w+)[<]/td')
+# name = name_type.findall(tag_str)
 up_down = up_down_type.findall(tag_str)
 up_down.pop(0)
-change = change_type.findall(tag_str)
-change.pop(0)
+# change = change_type.findall(tag_str)
+# change.pop(0)
 
 # print(name)
-# print(up_down)
+print(up_down)
 # print(change)
 
 
